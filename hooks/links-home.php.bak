@@ -4,7 +4,6 @@
 	 * The format for each link is:
 		$homeLinks[] = array(
 			'url' => 'path/to/link', 
-			'target' => '_blank',
 			'title' => 'Link title', 
 			'description' => 'Link text',
 			'groups' => array('group1', 'group2'), // groups allowed to see this link, use '*' if you want to show the link to all groups
@@ -15,6 +14,14 @@
 		);
 	 */
 
+		$homeLinks[] = array(
+			'url' => 'http://www.lairreviews.com/wp-admin/', 
+			'target' => '_blank',
+			'title' => 'Lair Reviews',			
+			'description' => 'Lair Reviews Admin Panel',
+			'groups' => array('Admins', 'sysop'), 
+			'icon' => 'images/lairrev.png'
+		);
 		$homeLinks[] = array(
 			'url' => 'https://admin.mycommerce.com/app/cp/login/affiliate',
 			'target' => '_blank',
@@ -47,4 +54,12 @@
 			'description' => 'Shareware Lair Admin Panel',
 			'groups' => array('Admins', 'sysop'), 
 			'icon' => 'images/swl.png'
-		);
+		); 
+		$homeLinks[] = array(
+			'url' => 'http://swldba.sharewarelair.com/', 
+			'target' => '_blank',
+			'title' => 'SWL Database Admin',			
+			'description' => 'Shareware Lair database Admin tools',
+			'groups' => array('Admins', 'sysop'), 
+			'icon' => 'images/swl.png'
+		);		

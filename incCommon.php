@@ -48,12 +48,12 @@
 	function getTableList($skip_authentication = false){
 		$arrAccessTables = array();
 		$arrTables = array(   
-			'submitlog' => array('PAD Submissions', 'Manage PAD submissions ', 'resources/table_icons/application_form_magnify.png', 'None'),
-			'paddata' => array('Search PAD Data', '', 'resources/table_icons/application_form_magnify.png', 'None'),
-			'customurls' => array('Custom URLs', '', 'resources/table_icons/orbit.png', 'None'),
-			'bannerlist' => array('Banners', 'Add or Modify banners ', 'resources/table_icons/chart_pie_alternative.png', 'None'),
-			'blacklist' => array('Black List', 'Block URLS or domains from submitting pad Files', 'resources/table_icons/bomb.png', 'None'),
-			'usrreviews' => array('User Reviews', '', 'resources/table_icons/client_account_template.png', 'None')
+			'submitlog' => array('PAD Submissions', 'Manage PAD submissions ', 'resources/table_icons/application_form_magnify.png', 'Manage PADs'),
+			'paddata' => array('Search PAD Data', '', 'resources/table_icons/application_form_magnify.png', 'Manage PADs'),
+			'customurls' => array('Custom URLs', '', 'resources/table_icons/orbit.png', 'Advertisement'),
+			'bannerlist' => array('Banners', 'Add or Modify banners ', 'resources/table_icons/chart_pie_alternative.png', 'Advertisement'),
+			'blacklist' => array('Black List', 'Block URLS or domains from submitting pad Files', 'resources/table_icons/bomb.png', 'Misc Tools'),
+			'usrreviews' => array('User Reviews', '', 'resources/table_icons/client_account_template.png', 'Misc Tools')
 		);
 		if($skip_authentication || getLoggedAdmin()) return $arrTables;
 
@@ -73,7 +73,7 @@
 
 	function get_table_groups($skip_authentication = false){
 		$tables = getTableList($skip_authentication);
-		$all_groups = array('None');
+		$all_groups = array('Manage PADs', 'Advertisement', 'Misc Tools');
 
 		$groups = array();
 		foreach($all_groups as $grp){
@@ -1206,7 +1206,7 @@ EOT;
 
 		ob_start();
 		foreach($homeLinks as $link){
-			if(!isset($link['url']) || !isset($link['title'] || !isset($link['target'])) continue; /* Added target for links */
+			if(!isset($link['url']) || !isset($link['title']) || !isset($link['target'])) continue;
 			if($tgroup != $link['table_group'] && $tgroup != '*') continue;
 
 			/* fall-back classes if none defined */
@@ -1219,7 +1219,7 @@ EOT;
 				<div class="col-xs-12 <?php echo $link['grid_column_classes']; ?>">
 					<div class="panel <?php echo $link['panel_classes']; ?>">
 						<div class="panel-body">
-							<a class="btn btn-block btn-lg <?php echo $link['link_classes']; ?>" target="<?php echo $link['target']; ?> title="<?php echo preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars(strip_tags($link['description']))); ?>" href="<?php echo $link['url']; ?>"><?php echo ($link['icon'] ? '<img src="' . $link['icon'] . '">' : ''); ?><strong><?php echo $link['title']; ?></strong></a>
+							<a class="btn btn-block btn-lg <?php echo $link['link_classes']; ?>" target="<?php echo $link['target']; ?>" title="<?php echo preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars(strip_tags($link['description']))); ?>" href="<?php echo $link['url']; ?>"><?php echo ($link['icon'] ? '<img src="' . $link['icon'] . '">' : ''); ?><strong><?php echo $link['title']; ?></strong></a>
 							<div class="panel-body-description"><?php echo $link['description']; ?></div>
 						</div>
 					</div>

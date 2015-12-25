@@ -54,29 +54,12 @@
 			'description' => 'Shareware Lair Admin Panel',
 			'groups' => array('Admins', 'sysop'), 
 			'icon' => 'images/swl.png'
-		);
-		
+		); 
 		$homeLinks[] = array(
-			'url' => 'submitlog_view.php?Filter_x=1?SortField=&SortDirection=&FilterAnd%5B1%5D=&FilterField%5B1%5D=2&FilterOperator%5B1%5D=not-equal-to&FilterValue%5B1%5D=0?SortField=&SortDirection=&FilterAnd%5B1%5D=&FilterField%5B1%5D=2&FilterOperator%5B1%5D=not-equal-to&FilterValue%5B1%5D=0', 
-			'target' => 'parent',
-			'title' => 'Confirmed Submissions',			
-			'description' => 'Submission that have been confirmed by email',
+			'url' => 'http://swldba.freewarelair.com/', 
+			'target' => '_blank',
+			'title' => 'FWL Database Admin',			
+			'description' => 'Freeware Lair database Admin tools',
 			'groups' => array('Admins', 'sysop'), 
-			'icon' => 'images/swl.png'
-		);
-		$homeLinks[] = array(
-			'url' => 'submitlog_view.php?SortField=&SortDirection=&FilterAnd%5B1%5D=&FilterField%5B1%5D=2&FilterOperator%5B1%5D=not-equal-to&FilterValue%5B1%5D=1&FilterAnd%5B2%5D=&FilterField%5B2%5D=31&FilterOperator%5B2%5D=like&FilterValue%5B2%5D=regno', 
-			'target' => 'parent',
-			'title' => 'Not Confirmed: RegNow',			
-			'description' => 'Affiliate submissions that are not confirmed',
-			'groups' => array('Admins', 'sysop'), 
-			'icon' => 'images/swl.png'
-		);
-		$homeLinks[] = array(
-			'url' => 'submitlog_view.php?SortField=&SortDirection=&FilterAnd%5B1%5D=&FilterField%5B1%5D=2&FilterOperator%5B1%5D=not-equal-to&FilterValue%5B1%5D=1&FilterAnd%5B2%5D=and&FilterField%5B2%5D=31&FilterOperator%5B2%5D=like&FilterValue%5B2%5D=share-it', 
-			'target' => 'parent',
-			'title' => 'Not Confirmed: Share-It',			
-			'description' => 'Affiliate submissions that have not been confirmed',
-			'groups' => array('Admins', 'sysop'), 
-			'icon' => 'images/swl.png'
-		);
+			'icon' => 'images/lairrev.png'
+		);		

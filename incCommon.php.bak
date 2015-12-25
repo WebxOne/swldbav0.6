@@ -48,12 +48,12 @@
 	function getTableList($skip_authentication = false){
 		$arrAccessTables = array();
 		$arrTables = array(   
-			'bannerlist' => array('Banners', 'Add or Modify banners ', 'resources/table_icons/chart_pie_alternative.png', 'None'),
-			'blacklist' => array('Black List', 'Block URLS or domains from submitting pad Files', 'resources/table_icons/bomb.png', 'None'),
-			'customurls' => array('Custom URLs', '', 'resources/table_icons/orbit.png', 'None'),
-			'paddata' => array('Search PAD Data', '', 'resources/table_icons/application_form_magnify.png', 'None'),
-			'submitlog' => array('PAD Submissions', 'Manage PAD submissions ', 'resources/table_icons/application_form_magnify.png', 'None'),
-			'usrreviews' => array('User Reviews', '', 'resources/table_icons/client_account_template.png', 'None')
+			'submitlog' => array('PAD Submissions', 'Manage PAD submissions ', 'resources/table_icons/application_form_magnify.png', 'Manage PADs'),
+			'paddata' => array('Search PAD Data', '', 'resources/table_icons/application_form_magnify.png', 'Manage PADs'),
+			'customurls' => array('Custom URLs', '', 'resources/table_icons/orbit.png', 'Advertisement'),
+			'bannerlist' => array('Banners', 'Add or Modify banners ', 'resources/table_icons/chart_pie_alternative.png', 'Advertisement'),
+			'blacklist' => array('Black List', 'Block URLS or domains from submitting pad Files', 'resources/table_icons/bomb.png', 'Misc Tools'),
+			'usrreviews' => array('User Reviews', '', 'resources/table_icons/client_account_template.png', 'Misc Tools')
 		);
 		if($skip_authentication || getLoggedAdmin()) return $arrTables;
 
@@ -73,7 +73,7 @@
 
 	function get_table_groups($skip_authentication = false){
 		$tables = getTableList($skip_authentication);
-		$all_groups = array('None');
+		$all_groups = array('Manage PADs', 'Advertisement', 'Misc Tools');
 
 		$groups = array();
 		foreach($all_groups as $grp){
@@ -140,11 +140,11 @@
 
 	function get_sql_fields($table_name){
 		$sql_fields = array(   
+			'submitlog' => "`submitlog`.`submid` as 'submid', `submitlog`.`cstatus` as 'cstatus', DATE_FORMAT(`submitlog`.`logtime`, '%c/%e/%Y %l:%i%p') as 'logtime', `submitlog`.`ipaddr` as 'ipaddr', `submitlog`.`company` as 'company', `submitlog`.`country` as 'country', `submitlog`.`website` as 'website', `submitlog`.`contactname` as 'contactname', `submitlog`.`email` as 'email', `submitlog`.`title` as 'title', `submitlog`.`version` as 'version', if(`submitlog`.`pdate`,date_format(`submitlog`.`pdate`,'%m/%d/%Y'),'') as 'pdate', `submitlog`.`cost` as 'cost', `submitlog`.`ptype` as 'ptype', `submitlog`.`install` as 'install', `submitlog`.`os` as 'os', `submitlog`.`languages` as 'languages', `submitlog`.`changeinfo` as 'changeinfo', `submitlog`.`category` as 'category', `submitlog`.`requirements` as 'requirements', `submitlog`.`ksize` as 'ksize', `submitlog`.`keywords` as 'keywords', `submitlog`.`description` as 'description', `submitlog`.`descrlarge` as 'descrlarge', `submitlog`.`homepage` as 'homepage', `submitlog`.`screenshot` as 'screenshot', `submitlog`.`icon` as 'icon', `submitlog`.`padfile` as 'padfile', `submitlog`.`download` as 'download', `submitlog`.`aspnumber` as 'aspnumber', `submitlog`.`backlink` as 'backlink', `submitlog`.`affiliate` as 'affiliate', `submitlog`.`affiliateid` as 'affiliateid'",
+			'paddata' => "`paddata`.`progid` as 'progid', `paddata`.`company` as 'company', `paddata`.`country` as 'country', `paddata`.`website` as 'website', `paddata`.`contactname` as 'contactname', `paddata`.`email` as 'email', `paddata`.`title` as 'title', `paddata`.`version` as 'version', if(`paddata`.`pdate`,date_format(`paddata`.`pdate`,'%m/%d/%Y'),'') as 'pdate', `paddata`.`cost` as 'cost', `paddata`.`ptype` as 'ptype', `paddata`.`status` as 'status', `paddata`.`install` as 'install', `paddata`.`os` as 'os', `paddata`.`languages` as 'languages', `paddata`.`changeinfo` as 'changeinfo', `paddata`.`category` as 'category', `paddata`.`requirements` as 'requirements', `paddata`.`ksize` as 'ksize', `paddata`.`keywords` as 'keywords', `paddata`.`description` as 'description', `paddata`.`descrlarge` as 'descrlarge', `paddata`.`homepage` as 'homepage', `paddata`.`screenshot` as 'screenshot', `paddata`.`icon` as 'icon', `paddata`.`padfile` as 'padfile', `paddata`.`download` as 'download', `paddata`.`dlcount` as 'dlcount', `paddata`.`dlipaddr` as 'dlipaddr', `paddata`.`aspnumber` as 'aspnumber', `paddata`.`affiliate` as 'affiliate', `paddata`.`affiliateid` as 'affiliateid', `paddata`.`siterating` as 'siterating', `paddata`.`clean` as 'clean', `paddata`.`paderrcount` as 'paderrcount'",
+			'customurls' => "`customurls`.`customid` as 'customid', `customurls`.`progid` as 'progid', `customurls`.`customurl` as 'customurl'",
 			'bannerlist' => "`bannerlist`.`bannerid` as 'bannerid', `bannerlist`.`imgurl` as 'imgurl', `bannerlist`.`linkurl` as 'linkurl', `bannerlist`.`listdisp` as 'listdisp', `bannerlist`.`dldisp` as 'dldisp', `bannerlist`.`authdisp` as 'authdisp'",
 			'blacklist' => "`blacklist`.`blackid` as 'blackid', `blacklist`.`bldomain` as 'bldomain'",
-			'customurls' => "`customurls`.`customid` as 'customid', `customurls`.`progid` as 'progid', `customurls`.`customurl` as 'customurl'",
-			'paddata' => "`paddata`.`progid` as 'progid', `paddata`.`company` as 'company', `paddata`.`country` as 'country', `paddata`.`website` as 'website', `paddata`.`contactname` as 'contactname', `paddata`.`email` as 'email', `paddata`.`title` as 'title', `paddata`.`version` as 'version', if(`paddata`.`pdate`,date_format(`paddata`.`pdate`,'%m/%d/%Y'),'') as 'pdate', `paddata`.`cost` as 'cost', `paddata`.`ptype` as 'ptype', `paddata`.`status` as 'status', `paddata`.`install` as 'install', `paddata`.`os` as 'os', `paddata`.`languages` as 'languages', `paddata`.`changeinfo` as 'changeinfo', `paddata`.`category` as 'category', `paddata`.`requirements` as 'requirements', `paddata`.`ksize` as 'ksize', `paddata`.`keywords` as 'keywords', `paddata`.`description` as 'description', `paddata`.`descrlarge` as 'descrlarge', `paddata`.`homepage` as 'homepage', `paddata`.`screenshot` as 'screenshot', `paddata`.`icon` as 'icon', `paddata`.`padfile` as 'padfile', `paddata`.`download` as 'download', `paddata`.`dlcount` as 'dlcount', `paddata`.`dlipaddr` as 'dlipaddr', `paddata`.`aspnumber` as 'aspnumber', `paddata`.`affiliate` as 'affiliate', `paddata`.`affiliateid` as 'affiliateid', `paddata`.`siterating` as 'siterating', `paddata`.`clean` as 'clean', `paddata`.`paderrcount` as 'paderrcount'",
-			'submitlog' => "`submitlog`.`submid` as 'submid', `submitlog`.`cstatus` as 'cstatus', DATE_FORMAT(`submitlog`.`logtime`, '%c/%e/%Y %l:%i%p') as 'logtime', `submitlog`.`ipaddr` as 'ipaddr', `submitlog`.`company` as 'company', `submitlog`.`country` as 'country', `submitlog`.`website` as 'website', `submitlog`.`contactname` as 'contactname', `submitlog`.`email` as 'email', `submitlog`.`title` as 'title', `submitlog`.`version` as 'version', if(`submitlog`.`pdate`,date_format(`submitlog`.`pdate`,'%m/%d/%Y'),'') as 'pdate', `submitlog`.`cost` as 'cost', `submitlog`.`ptype` as 'ptype', `submitlog`.`install` as 'install', `submitlog`.`os` as 'os', `submitlog`.`languages` as 'languages', `submitlog`.`changeinfo` as 'changeinfo', `submitlog`.`category` as 'category', `submitlog`.`requirements` as 'requirements', `submitlog`.`ksize` as 'ksize', `submitlog`.`keywords` as 'keywords', `submitlog`.`description` as 'description', `submitlog`.`descrlarge` as 'descrlarge', `submitlog`.`homepage` as 'homepage', `submitlog`.`screenshot` as 'screenshot', `submitlog`.`icon` as 'icon', `submitlog`.`padfile` as 'padfile', `submitlog`.`download` as 'download', `submitlog`.`aspnumber` as 'aspnumber', `submitlog`.`backlink` as 'backlink', `submitlog`.`affiliate` as 'affiliate', `submitlog`.`affiliateid` as 'affiliateid'",
 			'usrreviews' => "`usrreviews`.`revid` as 'revid', `usrreviews`.`progid` as 'progid', `usrreviews`.`useripaddr` as 'useripaddr', `usrreviews`.`revtime` as 'revtime', `usrreviews`.`username` as 'username', `usrreviews`.`userrating` as 'userrating', `usrreviews`.`usercomment` as 'usercomment'"
 		);
 
@@ -159,20 +159,20 @@
 
 	function get_sql_from($table_name, $skip_permissions = false){
 		$sql_from = array(   
+			'submitlog' => "`submitlog` ",
+			'paddata' => "`paddata` ",
+			'customurls' => "`customurls` ",
 			'bannerlist' => "`bannerlist` ",
 			'blacklist' => "`blacklist` ",
-			'customurls' => "`customurls` ",
-			'paddata' => "`paddata` ",
-			'submitlog' => "`submitlog` ",
 			'usrreviews' => "`usrreviews` "
 		);
 
 		$pkey = array(   
+			'submitlog' => 'submid',
+			'paddata' => 'progid',
+			'customurls' => 'customid',
 			'bannerlist' => 'bannerid',
 			'blacklist' => 'blackid',
-			'customurls' => 'customid',
-			'paddata' => 'progid',
-			'submitlog' => 'submid',
 			'usrreviews' => 'revid'
 		);
 
@@ -243,9 +243,9 @@
 					$_SESSION['memberID']=$username;
 					$_SESSION['memberGroupID']=sqlValue("select groupID from membership_users where lcase(memberID)='$username'");
 					if($_POST['rememberMe']==1){
-						@setcookie('swldev_rememberMe', md5($username.$password), time()+86400*30);
+						@setcookie('SWLDBA_rememberMe', md5($username.$password), time()+86400*30);
 					}else{
-						@setcookie('swldev_rememberMe', '', time()-86400*30);
+						@setcookie('SWLDBA_rememberMe', '', time()-86400*30);
 					}
 
 					// hook: login_ok
@@ -274,8 +274,8 @@
 			if(!headers_sent()) header('HTTP/1.0 403 Forbidden');
 			redirect("index.php?loginFailed=1");
 			exit;
-		}elseif((!$_SESSION['memberID'] || $_SESSION['memberID']==$adminConfig['anonymousMember']) && $_COOKIE['swldev_rememberMe']!=''){
-			$chk=makeSafe($_COOKIE['swldev_rememberMe']);
+		}elseif((!$_SESSION['memberID'] || $_SESSION['memberID']==$adminConfig['anonymousMember']) && $_COOKIE['SWLDBA_rememberMe']!=''){
+			$chk=makeSafe($_COOKIE['SWLDBA_rememberMe']);
 			if($username=sqlValue("select memberID from membership_users where convert(md5(concat(memberID, passMD5)), char)='$chk' and isBanned=0")){
 				$_SESSION['memberID']=$username;
 				$_SESSION['memberGroupID']=sqlValue("select groupID from membership_users where lcase(memberID)='$username'");
@@ -309,7 +309,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<!-- application title is obtained from the name besides the yellow database icon in AppGini, use underscores for spaces -->
-				<a class="navbar-brand" href="<?php echo PREPEND_PATH; ?>index.php"><i class="glyphicon glyphicon-home"></i> swldev</a>
+				<a class="navbar-brand" href="<?php echo PREPEND_PATH; ?>index.php"><i class="glyphicon glyphicon-home"></i> SWLDBA</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
@@ -1057,7 +1057,7 @@
 				if($tChkHL !== false && $tChkHL !== null) continue;
 
 				/* ---- list of tables where filter first is set ---- */
-				$tChkFF = array_search($tn, array('paddata','submitlog'));
+				$tChkFF = array_search($tn, array('submitlog','paddata'));
 				if($tChkFF !== false && $tChkFF !== null){
 					$searchFirst = '&Filter_x=1';
 				}else{
@@ -1206,7 +1206,7 @@ EOT;
 
 		ob_start();
 		foreach($homeLinks as $link){
-			if(!isset($link['url']) || !isset($link['title']) || !isset($link['target'])) continue;
+			if(!isset($link['url']) || !isset($link['title'])) continue;
 			if($tgroup != $link['table_group'] && $tgroup != '*') continue;
 
 			/* fall-back classes if none defined */
@@ -1219,7 +1219,7 @@ EOT;
 				<div class="col-xs-12 <?php echo $link['grid_column_classes']; ?>">
 					<div class="panel <?php echo $link['panel_classes']; ?>">
 						<div class="panel-body">
-							<a class="btn btn-block btn-lg <?php echo $link['link_classes']; ?>" target="<?php echo $link['target']; ?>"> title="<?php echo preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars(strip_tags($link['description']))); ?>" <a href="<?php echo $link['url']; ?> <?php echo ($link['icon'] ? '<img src="' . $link['icon'] . '">' : ''); ?><strong><?php echo $link['title']; ?></strong></a>
+							<a class="btn btn-block btn-lg <?php echo $link['link_classes']; ?>" title="<?php echo preg_replace("/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", htmlspecialchars(strip_tags($link['description']))); ?>" href="<?php echo $link['url']; ?>"><?php echo ($link['icon'] ? '<img src="' . $link['icon'] . '">' : ''); ?><strong><?php echo $link['title']; ?></strong></a>
 							<div class="panel-body-description"><?php echo $link['description']; ?></div>
 						</div>
 					</div>
