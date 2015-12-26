@@ -6,3 +6,4 @@ hooks/links-home.php.latest
 *.prod
 config.*
 config.php
+config.php
