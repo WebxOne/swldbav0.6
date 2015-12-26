@@ -56,9 +56,9 @@
 			'icon' => 'images/swl.png'
 		); 
 		$homeLinks[] = array(
-			'url' => 'http://swldba.freewarelair.com/', 
+			'url' => 'http://fwldba.freewarelair.com/', 
 			'target' => '_blank',
-			'title' => 'FWL Database Admin',			
+			'title' => 'Database Admin',			
 			'description' => 'Freeware Lair database Admin tools',
 			'groups' => array('Admins', 'sysop'), 
 			'icon' => 'images/lairrev.png'

@@ -1057,7 +1057,7 @@
 				if($tChkHL !== false && $tChkHL !== null) continue;
 
 				/* ---- list of tables where filter first is set ---- */
-				$tChkFF = array_search($tn, array('submitlog','paddata'));
+				$tChkFF = array_search($tn, array('paddata'));
 				if($tChkFF !== false && $tChkFF !== null){
 					$searchFirst = '&Filter_x=1';
 				}else{

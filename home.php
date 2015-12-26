@@ -58,7 +58,7 @@
 		$i = 0; $current_group = '';
 		foreach($tg as $tn => $tgroup){
 			$tc = $arrTables[$tn];
-			$tChkFF = array_search($tn, array('submitlog','paddata'));
+			$tChkFF = array_search($tn, array('paddata'));
 			$tChkHL = array_search($tn, array());
 			$tChkAHAN = array_search($tn, array('customurls','bannerlist'));
 

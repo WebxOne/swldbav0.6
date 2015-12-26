@@ -5,3 +5,4 @@ hooks/links-home.php.latest
 *.bak
 *.prod
 config.*
+config.php
