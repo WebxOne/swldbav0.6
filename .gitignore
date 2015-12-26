@@ -4,3 +4,4 @@ hooks/links-home.php.latest
 hooks/links-home.php.latest
 *.bak
 *.prod
+config.*
